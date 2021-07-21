@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import Topbar from './Topbar'
 import { Row, Container, Col, Form, Button } from 'react-bootstrap'
+import ScrollToTop from "react-scroll-to-top"
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -78,7 +79,7 @@ function App() {
         </>
       )
     }
-    return `Price: ${price}`
+    return <span style={{ fontWeight: 'bold' }}>{formatter.format(price)}</span>
   }
 
   // clear search results
@@ -117,6 +118,7 @@ function App() {
 
   return (
     <div className="App">
+      <ScrollToTop smooth color="#3a23ad" />
       <Topbar />
       <Container className="pt-3 pb-3">
         <Form className="pb-4">
@@ -155,7 +157,7 @@ function App() {
         {getResults !== undefined && getResults !== '' && (
           <>
             <Button
-              variant="secondary"
+              variant="primary"
               value="decrease"
               onClick={(e) => handlePageClick(e, 'decrease')}
             >
@@ -178,9 +180,9 @@ function App() {
             'Page: ' + getPage + ' / ' + getPagination.results.totalPages}
         </p>
         {getResults !== undefined && getResults !== '' && (
-          <>
+          <div className="pd-2">
             <Button
-              variant="secondary"
+              variant="primary"
               value="decrease"
               onClick={(e) => handlePageClick(e, 'decrease')}
             >
@@ -193,7 +195,7 @@ function App() {
             >
               <i className="bi bi-caret-right-fill" />
             </Button>
-          </>
+          </div>
         )}
         <br />
       </Container>
