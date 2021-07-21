@@ -102,9 +102,9 @@ function App() {
               <Col key={result.id} md={4}>
                 <div className="search-result">
                   <img src={result.thumbnailImageUrl} thumbnail="true" />
-                  <p>{result.title}</p>
+                  <p className="pt-3 pb-4">{result.title}<br/>{result.msrp && checkPricing(result.msrp, result.price)}</p>
                   <p>
-                    {result.msrp && checkPricing(result.msrp, result.price)}
+                    
                   </p>
                 </div>
               </Col>
