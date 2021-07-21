@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import Topbar from './Topbar'
-// import ReactPaginate from "react-paginate";
 import { Row, Container, Col, Form, Button } from 'react-bootstrap'
 
 const formatter = new Intl.NumberFormat('en-US', {
@@ -100,7 +99,7 @@ function App() {
         <Row>
           {getResults.results.map((result) => {
             return (
-              <Col key={result.id}>
+              <Col key={result.id} md={4}>
                 <div className="search-result">
                   <img src={result.thumbnailImageUrl} thumbnail="true" />
                   <p>{result.title}</p>
@@ -119,7 +118,7 @@ function App() {
   return (
     <div className="App">
       <Topbar />
-      <Container className="pt-3">
+      <Container className="pt-3 pb-3">
         <Form className="pb-4">
           <Row className="align-items-center">
             <Col sm={3} className="my-1">
@@ -152,7 +151,7 @@ function App() {
             'Page: ' + getPage + ' / ' + getPagination.results.totalPages}
         </p>
         <br />
-        {/* possibly add first/last page buttons */}
+
         {getResults !== undefined && getResults !== '' && (
           <>
             <Button
@@ -173,7 +172,11 @@ function App() {
         )}
 
         {isOpen && displayResults()}
-
+        <br />
+        <p>
+          {isOpen &&
+            'Page: ' + getPage + ' / ' + getPagination.results.totalPages}
+        </p>
         {getResults !== undefined && getResults !== '' && (
           <>
             <Button
