@@ -1,30 +1,44 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import "./App.css";
+import Topbar from "./Topbar";
+import ReactPaginate from 'react-paginate';
 import {
   Row,
   Container,
   Col,
   Form,
   Button,
-  Badge
 } from "react-bootstrap";
-import "./App.css";
-import Topbar from "./Topbar";
-
+const formatter = new Intl.NumberFormat("en-US", {
+	style: "currency",
+	currency: "USD",
+	minimumFractionDigits: 2
+});
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [getSearchBar, setSearchBar] = useState("");
   const [getResults, setResults] = useState();
   const [getTotalResults, setTotalResults] = useState();
-   
-  function handleSubmit(e) {
-    e.preventDefault();
-    searchResults(getSearchBar);
+  const [getPage, setPage] = useState(1);
+  const [offset, setOffset] = useState(0);
+
+  const handlePageClick = (e) => {
+    setOffset(offset + 1)
+};
+
+  useEffect(() => {
+    getResults && searchResults(getSearchBar)
+  }, [offset])
+
+function handleSubmit(e) {
+   e.preventESDefault();
+   searchResults(getSearchBar);
   }
 
 async function searchResults(searchTerm) {
-  const response = await fetch('https://scmq7n.a.searchspring.io/api/search/search.json?siteId=scmq7n&resultsFormat=native&q=' + searchTerm);
+  const response = await fetch('https://scmq7n.a.searchspring.io/api/search/search.json?siteId=scmq7n&resultsFormat=native&q=' + searchTerm + '&page=' + getPage);
   const json = await response.json();
   setResults(json);
   setTotalResults(json.pagination.totalResults);
@@ -32,16 +46,26 @@ async function searchResults(searchTerm) {
   return json;
 }
 
+function checkPricing(msrp, price) {
+  if(msrp > price && msrp !== "") {
+    return (
+      <>
+      <span style={{ textDecoration: 'line-through', color: 'gray' }}>{formatter.format(msrp)}</span>&nbsp;<span style={{ fontWeight: 'bold' }}>{formatter.format(price)}</span>
+      </>
+    );
+  }
+    return `Price: ${price}`;    
+}
+
 function displayResults() {
     return (
               <div className="search-results-list pt-4">
                 {getResults.results.map(result => {
-                  console.log(result.id);
                   return (
                     <div key={result.id} className="search-result">
                       <img src={result.thumbnailImageUrl} thumbnail/>
                       <p>{result.title}</p>
-                      <p>{result.price}</p>
+                      <p>{result.msrp && checkPricing(result.msrp,result.price)}</p>
                     </div>
                   );
                 })}
@@ -66,10 +90,26 @@ function displayResults() {
                 setSearchBar("");
                 setIsOpen(false)
                 }}>Clear</Button>
+                              <Button variant="danger" onClick={() => {
+                setPage(getPage + 1);
+                }}>+</Button>
             </Col>
           </Row>
         </Form>
         {isOpen && "Product results: " + getTotalResults}
+        <br/>
+        {isOpen && <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={getPage}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}/>}
         <br/>
         {isOpen && displayResults()}
       </Container>
