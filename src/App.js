@@ -90,21 +90,28 @@ function App() {
     setResults('')
     setTotalResults('')
     setIsOpen(false)
+    setPagination('')
   }
 
   // display results title and pricing, then send msrp and price to checkPricing
   function displayResults() {
     return (
       <div className="search-results-list pt-4">
-        {getResults.results.map((result) => {
-          return (
-            <div key={result.id} className="search-result">
-              <img src={result.thumbnailImageUrl} thumbnail="true" />
-              <p>{result.title}</p>
-              <p>{result.msrp && checkPricing(result.msrp, result.price)}</p>
-            </div>
-          )
-        })}
+        <Row>
+          {getResults.results.map((result) => {
+            return (
+              <Col key={result.id}>
+                <div className="search-result">
+                  <img src={result.thumbnailImageUrl} thumbnail="true" />
+                  <p>{result.title}</p>
+                  <p>
+                    {result.msrp && checkPricing(result.msrp, result.price)}
+                  </p>
+                </div>
+              </Col>
+            )
+          })}
+        </Row>
       </div>
     )
   }
@@ -133,9 +140,7 @@ function App() {
               </Button>
             </Col>
             <Col xs="auto" className="my-1">
-              <Button
-                variant="warning"
-                onClick={clearResults}>
+              <Button variant="warning" onClick={clearResults}>
                 Clear
               </Button>
             </Col>
@@ -148,22 +153,46 @@ function App() {
         </p>
         <br />
         {/* possibly add first/last page buttons */}
-        <Button
-          variant="secondary"
-          value="decrease"
-          onClick={(e) => handlePageClick(e, 'decrease')}
-        >
-          <i className="bi bi-caret-left-fill" />
-        </Button>
-        <Button
-          variant="danger"
-          value="increase"
-          onClick={(e) => handlePageClick(e, 'increase')}
-        >
-          <i className="bi bi-caret-right-fill" />
-        </Button>
+        {getResults !== undefined && getResults !== '' && (
+          <>
+            <Button
+              variant="secondary"
+              value="decrease"
+              onClick={(e) => handlePageClick(e, 'decrease')}
+            >
+              <i className="bi bi-caret-left-fill" />
+            </Button>
+            <Button
+              variant="danger"
+              value="increase"
+              onClick={(e) => handlePageClick(e, 'increase')}
+            >
+              <i className="bi bi-caret-right-fill" />
+            </Button>
+          </>
+        )}
 
         {isOpen && displayResults()}
+
+        {getResults !== undefined && getResults !== '' && (
+          <>
+            <Button
+              variant="secondary"
+              value="decrease"
+              onClick={(e) => handlePageClick(e, 'decrease')}
+            >
+              <i className="bi bi-caret-left-fill" />
+            </Button>
+            <Button
+              variant="danger"
+              value="increase"
+              onClick={(e) => handlePageClick(e, 'increase')}
+            >
+              <i className="bi bi-caret-right-fill" />
+            </Button>
+          </>
+        )}
+        <br />
       </Container>
     </div>
   )

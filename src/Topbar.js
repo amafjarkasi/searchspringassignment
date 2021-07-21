@@ -10,9 +10,9 @@ function Topbar() {
              <Navbar bg="light" variant="light">
     <Container>
     <Navbar.Brand href="#home">searchspring</Navbar.Brand>
-    <Nav className="me-auto">
+    {/* <Nav className="me-auto">
       <Nav.Link href="#home">Home</Nav.Link>
-    </Nav>
+    </Nav> */}
     </Container>
   </Navbar>
         </div>
