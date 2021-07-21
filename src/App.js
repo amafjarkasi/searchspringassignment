@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import Topbar from './Topbar'
 import { Row, Container, Col, Form, Button } from 'react-bootstrap'
-import ScrollToTop from "react-scroll-to-top"
+import ScrollToTop from 'react-scroll-to-top'
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -103,10 +103,12 @@ function App() {
               <Col key={result.id} md={4}>
                 <div className="search-result">
                   <img src={result.thumbnailImageUrl} thumbnail="true" />
-                  <p className="pt-3 pb-4">{result.title}<br/>{result.msrp && checkPricing(result.msrp, result.price)}</p>
-                  <p>
-                    
+                  <p className="pt-3 pb-4">
+                    {result.title}
+                    <br />
+                    {result.msrp && checkPricing(result.msrp, result.price)}
                   </p>
+                  <p></p>
                 </div>
               </Col>
             )
@@ -134,13 +136,14 @@ function App() {
             <Col xs="auto" className="my-1">
               <Button
                 type="submit"
+                variant="secondary"
                 onClick={handleSubmit}
                 onKeyPress={(e) => (e === 13 ? handleSubmit(e) : '')}
               >
                 Search
               </Button>
             </Col>
-            <Col xs="auto" className="my-1">
+            <Col xs="auto" className="">
               <Button variant="warning" onClick={clearResults}>
                 Clear
               </Button>
