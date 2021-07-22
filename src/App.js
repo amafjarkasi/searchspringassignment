@@ -67,11 +67,16 @@ function App() {
   }
 
   // compare pricing msrp vs sale price, display msrp if sale price is not available
-  function checkPricing(msrp, price) {
-    if (msrp > price) {
+  function checkPricing(msrp, price, salePrice) {
+    if (isNaN(msrp) && isNaN(price)) {
+      return (
+        <span style={{ fontWeight: 'bold' }}>
+          {formatter.format(salePrice)}
+        </span>
+      )
+    } else if (msrp > price) {
       return (
         <>
-          {(console.log('msrp ', msrp), console.log('price ', price))}
           <span style={{ textDecoration: 'line-through', color: 'gray' }}>
             {formatter.format(msrp)}
           </span>
@@ -110,7 +115,11 @@ function App() {
                   <p className="pt-3 pb-4">
                     {result.title}
                     <br />
-                    {checkPricing(parseInt(result.msrp), parseInt(result.price))}
+                    {checkPricing(
+                      parseInt(result.msrp),
+                      parseInt(result.price),
+                      parseInt(result.sale_price),
+                    )}
                   </p>
                   <p></p>
                 </div>
