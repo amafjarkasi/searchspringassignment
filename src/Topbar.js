@@ -6,9 +6,9 @@ import {
 function Topbar() {
     return (
         <div>
-             <Navbar bg="light" variant="light">
+             <Navbar style={{backgroundColor: '#3a23ad'}} variant="dark">
     <Container>
-    <Navbar.Brand href="#home">searchspring</Navbar.Brand>
+    <Navbar.Brand href="/">searchspring</Navbar.Brand>
     {/* <Nav className="me-auto">
       <Nav.Link href="#home">Home</Nav.Link>
     </Nav> */}
