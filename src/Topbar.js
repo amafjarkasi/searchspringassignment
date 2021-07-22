@@ -9,9 +9,6 @@ function Topbar() {
              <Navbar style={{backgroundColor: '#3a23ad'}} variant="dark">
     <Container>
     <Navbar.Brand>searchspring</Navbar.Brand>
-    {/* <Nav className="me-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-    </Nav> */}
     </Container>
   </Navbar>
         </div>
