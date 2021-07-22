@@ -26,8 +26,8 @@ function App() {
   }, [offset])
 
   // handle increments in changes in pagination
-  const handlePageClick = (e, changed) => {
-    e.preventDefault()
+  const handlePageClick = (event, changed) => {
+    event.preventDefault()
     if (changed === 'increase' && getPage < getPagination.results.totalPages) {
       setPage(getPage + 1)
       setOffset(offset + 1)
@@ -43,8 +43,8 @@ function App() {
   }
 
   // handle submit from buttons
-  function handleSubmit(e) {
-    e.preventDefault()
+  function handleSubmit(event) {
+    event.preventDefault()
     setOffset(0)
     setPage(1)
     searchResults(getSearchBar)
@@ -61,7 +61,7 @@ function App() {
     const json = await response.json()
     setResults(json)
     setPagination({ results: json.pagination })
-    setTotalResults(json.pagination.totalResults)
+    setTotalResults(getPagination.results.totalResults)
     setIsOpen(true)
     return json
   }
