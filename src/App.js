@@ -61,7 +61,7 @@ function App() {
     const json = await response.json()
     setResults(json)
     setPagination({ results: json.pagination })
-    setTotalResults(getPagination.results.totalResults)
+    setTotalResults(json.pagination.totalResults)
     setIsOpen(true)
     return json
   }
