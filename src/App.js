@@ -68,7 +68,9 @@ function App() {
 
   // compare pricing msrp vs sale price, display msrp if sale price is not available
   function checkPricing(msrp, price, salePrice) {
-    if (isNaN(msrp) && isNaN(price)) {
+    if (isNaN(salePrice) && isNaN(msrp) && isNaN(price)) {
+      return <span style={{ fontWeight: 'bold' }}>Sold Out</span>
+    } else if (isNaN(msrp) && isNaN(price)) {
       return (
         <span style={{ fontWeight: 'bold' }}>
           {formatter.format(salePrice)}
