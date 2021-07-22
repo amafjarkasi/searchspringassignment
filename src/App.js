@@ -68,9 +68,10 @@ function App() {
 
   // compare pricing msrp vs sale price, display msrp if sale price is not available
   function checkPricing(msrp, price) {
-    if (msrp > price && msrp !== '') {
+    if (msrp > price) {
       return (
         <>
+          {(console.log('msrp ', msrp), console.log('price ', price))}
           <span style={{ textDecoration: 'line-through', color: 'gray' }}>
             {formatter.format(msrp)}
           </span>
@@ -78,8 +79,11 @@ function App() {
           <span style={{ fontWeight: 'bold' }}>{formatter.format(price)}</span>
         </>
       )
+    } else {
+      return (
+        <span style={{ fontWeight: 'bold' }}>{formatter.format(price)}</span>
+      )
     }
-    return <span style={{ fontWeight: 'bold' }}>{formatter.format(price)}</span>
   }
 
   // clear search results
@@ -106,7 +110,7 @@ function App() {
                   <p className="pt-3 pb-4">
                     {result.title}
                     <br />
-                    {result.msrp && checkPricing(result.msrp, result.price)}
+                    {checkPricing(parseInt(result.msrp), parseInt(result.price))}
                   </p>
                   <p></p>
                 </div>
@@ -160,7 +164,7 @@ function App() {
             <Button
               variant="primary"
               value="decrease"
-              style={{ marginRight: "6px" }}
+              style={{ marginRight: '6px' }}
               onClick={(e) => handlePageClick(e, 'decrease')}
             >
               <i className="bi bi-caret-left-fill" />
@@ -186,7 +190,7 @@ function App() {
             <Button
               variant="primary"
               value="decrease"
-              style={{ marginRight: "6px" }}
+              style={{ marginRight: '6px' }}
               onClick={(e) => handlePageClick(e, 'decrease')}
             >
               <i className="bi bi-caret-left-fill" />
