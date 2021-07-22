@@ -160,6 +160,7 @@ function App() {
             <Button
               variant="primary"
               value="decrease"
+              style={{ marginRight: "6px" }}
               onClick={(e) => handlePageClick(e, 'decrease')}
             >
               <i className="bi bi-caret-left-fill" />
@@ -181,10 +182,11 @@ function App() {
             'Page: ' + getPage + ' / ' + getPagination.results.totalPages}
         </p>
         {getResults !== undefined && getResults !== '' && (
-          <div className="pd-2">
+          <div className="pb-2">
             <Button
               variant="primary"
               value="decrease"
+              style={{ marginRight: "6px" }}
               onClick={(e) => handlePageClick(e, 'decrease')}
             >
               <i className="bi bi-caret-left-fill" />
