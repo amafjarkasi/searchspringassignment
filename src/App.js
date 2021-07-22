@@ -68,7 +68,7 @@ function App() {
 
   // compare pricing msrp vs sale price, display msrp if sale price is not available
   function checkPricing(msrp, price) {
-    if (msrp > price && msrp !== '') {
+      if (msrp > price && msrp !== '') {
       return (
         <>
           <span style={{ textDecoration: 'line-through', color: 'gray' }}>
@@ -155,8 +155,6 @@ function App() {
           {isOpen &&
             'Page: ' + getPage + ' / ' + getPagination.results.totalPages}
         </p>
-        <br />
-
         {getResults !== undefined && getResults !== '' && (
           <>
             <Button
@@ -175,7 +173,7 @@ function App() {
             </Button>
           </>
         )}
-
+        <div className="pb-4"/>
         {isOpen && displayResults()}
         <br />
         <p>
