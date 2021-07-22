@@ -8,7 +8,7 @@ function Topbar() {
         <div>
              <Navbar style={{backgroundColor: '#3a23ad'}} variant="dark">
     <Container>
-    <Navbar.Brand href="/">searchspring</Navbar.Brand>
+    <Navbar.Brand>searchspring</Navbar.Brand>
     {/* <Nav className="me-auto">
       <Nav.Link href="#home">Home</Nav.Link>
     </Nav> */}
