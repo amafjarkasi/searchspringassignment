@@ -70,7 +70,7 @@ function App() {
   function checkPricing(msrp, price, salePrice) {
     if (isNaN(salePrice) && isNaN(msrp) && isNaN(price)) {
       return <span style={{ fontWeight: 'bold' }}>Sold Out</span>
-    } else if (isNaN(msrp) && isNaN(price)) {
+    } else if (isNaN(msrp) && isNaN(price) && salePrice !== "") {
       return (
         <span style={{ fontWeight: 'bold' }}>
           {formatter.format(salePrice)}
