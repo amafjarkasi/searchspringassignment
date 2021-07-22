@@ -158,14 +158,14 @@ function App() {
                 Search
               </Button>
             </Col>
-            <Col xs="auto" className="">
+            <Col xs="auto" className="my-1">
               <Button variant="warning" onClick={clearResults}>
                 Clear
               </Button>
             </Col>
           </Row>
         </Form>
-        <p>{isOpen && 'Product results: ' + getTotalResults}</p>
+        <p><b>{isOpen && 'Product results: ' + getTotalResults}</b></p>
         <p>
           {isOpen &&
             'Page: ' + getPage + ' / ' + getPagination.results.totalPages}
