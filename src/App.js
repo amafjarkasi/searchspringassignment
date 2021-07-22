@@ -25,7 +25,7 @@ function App() {
     getResults && searchResults(getSearchBar)
   }, [offset])
 
-  // have issue with undefined when changed not available
+  // handle increments in changes in pagination
   const handlePageClick = (e, changed) => {
     e.preventDefault()
     if (changed === 'increase' && getPage < getPagination.results.totalPages) {
@@ -68,7 +68,7 @@ function App() {
 
   // compare pricing msrp vs sale price, display msrp if sale price is not available
   function checkPricing(msrp, price) {
-      if (msrp > price && msrp !== '') {
+    if (msrp > price && msrp !== '') {
       return (
         <>
           <span style={{ textDecoration: 'line-through', color: 'gray' }}>
@@ -173,7 +173,7 @@ function App() {
             </Button>
           </>
         )}
-        <div className="pb-4"/>
+        <div className="pb-4" />
         {isOpen && displayResults()}
         <br />
         <p>
